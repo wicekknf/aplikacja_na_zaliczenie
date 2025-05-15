@@ -3,55 +3,65 @@
 
 <PageTitle>Weather</PageTitle>
 
-<h1>Weather</h1>
+<section id="contact"
+		 class="contact wrapper">
+	<h2 class="section-title">Masz pytania?</h2>
+	<p class="info">Napisz do nas!!!</p>
 
-<p>This component demonstrates fetching data from the server.</p>
+	<form>
+		<h3>Kontakt:</h3>
+		<div class="form-box">
+			<label for="name">🙋 imię:</label>
+			<input type="text"
+				   id="name"
+				   placeholder="Wpisz swoje imię"
+				   class="error" />
+			<p class="error-text">error</p>
+		</div>
 
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th aria-label="Temperature in Celsius">Temp. (C)</th>
-                <th aria-label="Temperature in Farenheit">Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+		<div class="form-box">
+			<label for="e-mail">📧 e-mail:</label>
+			<input type="e-mail"
+				   id="e-mail"
+				   placeholder="Wpisz swój adres e-mail" />
+			<p class="error-text">error</p>
+		</div>
+
+		<div class="form-box msg">
+			<label for="msg">📝 wiadomość:</label>
+			<textarea name=""
+					  id="msg"
+					  cols="30"
+					  rows="10"></textarea>
+			<p class="error-text">error</p>
+		</div>
+
+		<div class="control-buttons">
+			<button class="send">Wyślij</button>
+			<button class="clear">Wyczyść</button>
+		</div>
+
+		<div class="popup" id="test">
+			<p>Wiadomość wysłana!</p>
+			<button class="close">Zamknij</button>
+		</div>
+	</form>
+
+	<div class="line"></div>
+
+	<p class="info">Znajdziesz nas tutaj:</p>
+
+	<div class="map">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.9063228298583!2d19.890741345167804!3d50.08804072979723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165a326d015c3b%3A0x47a12cd367a1f34e!2sRestauracja%20McDonald&#39;s!5e0!3m2!1spl!2spl!4v1728331066914!5m2!1spl!2spl"
+				width="600"
+				height="450"
+				style="border: 0"
+				allowfullscreen=""
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"></iframe>
+	</div>
+</section>
 
 @code {
-    private WeatherForecast[]? forecasts;
-
-    protected override async Task OnInitializedAsync()
-    {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    }
-
-    public class WeatherForecast
-    {
-        public DateOnly Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string? Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-    }
+    
 }
